@@ -1,5 +1,5 @@
 # Use an official base image with your desired version
-FROM ollama/ollama:0.2.8
+FROM ollama/ollama:latest
 
 ENV PYTHONUNBUFFERED=1 
 
@@ -32,7 +32,8 @@ RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 9
 RUN pip install --upgrade pip
 
 # Add your file
-ADD . .
+ADD start.sh .
+ADD runpod_wrapper.py .
 
 RUN pip install runpod
 

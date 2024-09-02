@@ -33,10 +33,22 @@ def handler(job: HandlerJob):
         headers={"Content-Type": "application/json"},
         json=input["input"],
     )
+
+    if response.status_code != 200:
+        response = requests.get(
+            url=f"{base_url}/{input['method_name']}",
+        )
+
     response.encoding = "utf-8"
 
-    # TODO: handle errors
-    return response.json()
+    rtn_dict = response.json()
 
+    if 'context' in rtn_dict:
+        del rtn_dict['context']
+
+    return rtn_dict
+
+    # TODO: handle errors
+    #return response.json()
 
 runpod.serverless.start({"handler": handler})
