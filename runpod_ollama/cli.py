@@ -27,7 +27,7 @@ def create_template(model: str, disk_size: int):
 
     try:
         response = runpod.create_template(
-            name=model,
+            name="runpod_ollama",
             image_name="maksuzuki/runpod-ollama:v1",
             docker_start_cmd=model,
             is_serverless=True,
